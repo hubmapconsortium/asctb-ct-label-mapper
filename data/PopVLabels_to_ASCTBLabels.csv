@@ -1,0 +1,41 @@
+﻿source,raw_input_label,cleaned_input_label,match_score,matched_asctb_id,matched_asctb_label,exact_match_found_in_asctb
+PopV,adventitial cell,adventitial cell,0.7001540064811707,ASCTB CT_ID UNK,suprabasal cell,False
+PopV,alveolar fibroblast,alveolar fibroblast,0.7503905892372131,CL:4028004,alveolar type 1 fibroblast,False
+PopV,b cell,b cell,0.7005406022071838,CL:0000236,B cell,True
+PopV,basal cell,basal cell,0.6811748743057251,CL:1000348,basal cell,True
+PopV,basophil,basophil,0.3530886769294739,CL:0000094,neutrophil,False
+PopV,bronchial smooth muscle cell,bronchial smooth muscle cell,0.9999998807907104,CL:0002598,bronchial smooth muscle cell,True
+PopV,bronchial vessel endothelial cell,bronchial vessel endothelial cell,0.8536921739578247,CL:1001568,pulmonary artery endothelial cell,False
+PopV,capillary aerocyte,capillary aerocyte,0.6640943288803101,CL:4028003,CAP2 aerocyte capillary gCap,False
+PopV,capillary endothelial cell,capillary endothelial cell,0.7084331512451172,CL:1000413,arterial endothelial cell,False
+PopV,cd4-positive alpha-beta t cell,cd4positive alphabeta t cell,0.8020555377006531,CL:0000905,CD4+ T cell effector memory,False
+PopV,"cd4-positive, alpha-beta t cell",cd4positive alphabeta t cell,0.8020555377006531,CL:0000905,CD4+ T cell effector memory,False
+PopV,cd8-positive alpha-beta t cell,cd8positive alphabeta t cell,0.8450602293014526,CL:0000900,CD8+ T cell naive,False
+PopV,"cd8-positive, alpha-beta t cell",cd8positive alphabeta t cell,0.8450602293014526,CL:0000900,CD8+ T cell naive,False
+PopV,classical monocyte,classical monocyte,0.5843422412872314,CL:0000860,classical monocyte,True
+PopV,club cell,club cell,0.4098435640335083,ASCTB CT_ID UNK,suprabasal cell,False
+PopV,dendritic cell,dendritic cell,0.7564128041267395,ASCTB CT_ID UNK,migratory dendritic cell,False
+PopV,endothelial cell of artery,endothelial cell of artery,0.8548914194107056,CL:1000413,arterial endothelial cell,False
+PopV,endothelial cell of lymphatic vessel,endothelial cell of lymphatic vessel,0.7853553295135498,CL:0009086,lymphatic endothelial cell,False
+PopV,fibroblast,fibroblast,0.6509153842926025,ASCTB CT_ID UNK,perichondrial fibroblasts,False
+PopV,intermediate monocyte,intermediate monocyte,0.573226809501648,CL:0000860,classical monocyte,False
+PopV,lung ciliated cell,lung ciliated cell,1.0,CL:1000271,lung ciliated cell,True
+PopV,lung microvascular endothelial cell,lung microvascular endothelial cell,0.8654752969741821,CL:1001568,pulmonary artery endothelial cell,False
+PopV,macrophage,macrophage,0.8324536681175232,LMHA:00213,Interstitial macrophage,False
+PopV,mesothelial cell,mesothelial cell,0.7446922659873962,CL:1000493,mesothelial cell,True
+PopV,myofibroblast cell,myofibroblast cell,0.6881502270698547,CL:0000186,secondary crest myofibroblasts,False
+PopV,neutrophil,neutrophil,0.7455151081085205,CL:0000094,neutrophil,True
+PopV,nk cell,nk cell,0.6410555839538574,CL:0000814,NK T cell,False
+PopV,non-classical monocyte,nonclassical monocyte,0.6592209935188293,CL:0000875,non-classical monocyte,False
+PopV,pericyte cell,pericyte cell,0.7938810586929321,CL:0009089,lung pericyte,False
+PopV,plasma cell,plasma cell,0.6041157841682434,ASCTB CT_ID UNK,suprabasal cell,False
+PopV,plasmacytoid dendritic cell,plasmacytoid dendritic cell,0.7891559600830078,CL:0000784,plasmacytoid dendritic cell,True
+PopV,pulmonary ionocyte,pulmonary ionocyte,0.762731671333313,CL:0017000,pulmonary ionocyte,True
+PopV,respiratory goblet cell,respiratory goblet cell,0.8258867859840393,CL:1000143,bronchial goblet cell,False
+PopV,respiratory mucous cell,respiratory mucous cell,0.8100886940956116,ASCTB CT_ID UNK,respiratory airway secretory cell,False
+PopV,serous cell of epithelium of bronchus,serous cell of epithelium of bronchus,0.7776184678077698,CL:1000350,basal cell,False
+PopV,smooth muscle cell,smooth muscle cell,0.7709948420524597,CL:0002598,bronchial smooth muscle cell,False
+PopV,type i pneumocyte,type i pneumocyte,0.6277726292610168,CL:0002062,AT1,False
+PopV,type ii pneumocyte,type ii pneumocyte,0.5974161624908447,CL:0002062,AT1,False
+PopV,vascular associated smooth muscle cell,vascular associated smooth muscle cell,0.8667296767234802,CL:0019018,vascular smooth muscle,False
+PopV,vein endothelial cell,vein endothelial cell,0.8517533540725708,CL:0002543,venous endothelial cell,False

@@ -1,0 +1,45 @@
+﻿source,raw_input_label,cleaned_input_label,match_score,matched_asctb_id,matched_asctb_label,exact_match_found_in_asctb
+Azimuth,adventitial fibroblasts,adventitial fibroblast,0.625990092754364,ASCTB CT_ID UNK,perichondrial fibroblasts,False
+Azimuth,alveolar fibroblasts,alveolar fibroblast,0.7503905892372131,CL:4028004,alveolar type 1 fibroblast,False
+Azimuth,alveolar macrophages,alveolar macrophage,0.9366430044174194,ASCTB CT_ID UNK,alveolar macrophage proliferating,False
+Azimuth,alveolar mï† proliferating,alveolar m proliferating,0.7384202480316162,ASCTB CT_ID UNK,alveolar macrophage proliferating,False
+Azimuth,at1,at1,0.2462996542453766,CL:0002062,AT1,True
+Azimuth,at2,at2,0.23461095988750458,CL:0002062,AT1,False
+Azimuth,at2 proliferating,at2 proliferating,0.40604346990585327,CL:0002063,AT2,False
+Azimuth,b cells,b cell,0.7005406022071838,CL:0000236,B cell,True
+Azimuth,basal resting,basal resting,0.4230489134788513,CL:1000348,basal cell,False
+Azimuth,cd4 t cells,cd4 t cell,0.7150702476501465,CL:0000905,CD4+ T cell effector memory,False
+Azimuth,cd8 t cells,cd8 t cell,0.7356367111206055,CL:0000913,CD8+ T cell effector memory,False
+Azimuth,classical monocytes,classical monocyte,0.5843422412872314,CL:0000860,classical monocyte,True
+Azimuth,club (nasal),club nasal,0.36602896451950073,CL:0019002,chondrocyte,False
+Azimuth,club (non-nasal),club nonnasal,0.19410081207752228,CL:0000158,club cell,False
+Azimuth,dc2,dc2,0.2916159927845001,CL:0002399,cDC2 myeloid dendritic cell,False
+Azimuth,deuterosomal,deuterosomal,0.6854729056358337,ASCTB CT_ID UNK,airway deuterosomal cell,False
+Azimuth,ec aerocyte capillary,ec aerocyte capillary,0.6010616421699524,CL:4028003,CAP2 aerocyte capillary gCap,False
+Azimuth,ec arterial,ec arterial,0.5133800506591797,CL:1000413,arterial endothelial cell,False
+Azimuth,ec general capillary,ec general capillary,0.4777963161468506,CL:4028002,CAP1 general capillary aCap,False
+Azimuth,ec venous pulmonary,ec venous pulmonary,0.7152866125106812,CL:0002543,pulmonary venous endothelial cell,False
+Azimuth,ec venous systemic,ec venous systemic,0.6223162412643433,CL:0002543,venous endothelial cell,False
+Azimuth,goblet (nasal),goblet nasal,0.6020657420158386,CL:1000143,bronchial goblet cell,False
+Azimuth,interstitial mï† perivascular,interstitial m perivascular,0.4262758791446686,ASCTB CT_ID UNK,perichondrial fibroblasts,False
+Azimuth,ionocyte,ionocyte,0.5611793994903564,CL:0017000,pulmonary ionocyte,False
+Azimuth,lymphatic ec differentiating,lymphatic ec differentiating,0.4713963568210602,CL:0009086,lymphatic endothelial cell,False
+Azimuth,lymphatic ec mature,lymphatic ec mature,0.4939851760864258,CL:0009086,lymphatic endothelial cell,False
+Azimuth,mast cells,mast cell,0.667164146900177,CL:0000484,connective tissue mast cell,False
+Azimuth,monocyte-derived mï†,monocytederived m,0.40612849593162537,CL:0000875,non-classical monocyte,False
+Azimuth,multiciliated (nasal),multiciliated nasal,0.41497603058815,LMHA:00238,submucosal gland mucous cells,False
+Azimuth,multiciliated (non-nasal),multiciliated nonnasal,0.2541038691997528,ASCTB CT_ID UNK,suprabasal cell,False
+Azimuth,myofibroblasts,myofibroblasts,0.6052818298339844,CL:0000186,secondary crest myofibroblasts,False
+Azimuth,nk cells,nk cell,0.6410555839538574,CL:0000814,NK T cell,False
+Azimuth,non-classical monocytes,nonclassical monocyte,0.6592209935188293,CL:0000875,non-classical monocyte,False
+Azimuth,peribronchial fibroblasts,peribronchial fibroblast,0.8265331983566284,ASCTB CT_ID UNK,perichondrial fibroblasts,False
+Azimuth,pericytes,pericytes,0.6250534057617188,CL:0009089,lung pericyte,False
+Azimuth,plasma cells,plasma cell,0.6041157841682434,ASCTB CT_ID UNK,suprabasal cell,False
+Azimuth,plasmacytoid dcs,plasmacytoid dc,0.5519440770149231,CL:0002399,cDC2 myeloid dendritic cell,False
+Azimuth,sm activated stress response,sm activated stress response,0.2744065821170807,CL:0000815,regulatory T cell,False
+Azimuth,smg mucous,smg mucous,0.5613130927085876,LMHA:00238,submucosal gland mucous cells,False
+Azimuth,smooth muscle,smooth muscle,0.5514345765113831,CL:0019018,vascular smooth muscle cell,False
+Azimuth,suprabasal,suprabasal,0.610107958316803,ASCTB CT_ID UNK,suprabasal cell,False
+Azimuth,t cells proliferating,t cell proliferating,0.5324549674987793,CL:0000815,regulatory T cell,False
+Azimuth,transitional club-at2,transitional clubat2,0.1565302461385727,CL:0000158,club cell,False
+Azimuth,tuft,tuft,0.5056148767471313,CL:0002207,tuft cell,False
