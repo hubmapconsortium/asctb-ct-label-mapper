@@ -6,9 +6,11 @@ from nltk.stem import WordNetLemmatizer
 
 
 def download_nlp_models():
+    print(f'Downloading NLP models required for preprocessing...')
     nltk.download('wordnet', quiet=True)
     nltk.download('omw-1.4', quiet=True)
     nltk.download('stopwords', quiet=True)
+    print(f'Models downloaded and ready for use!')
 
 
 
