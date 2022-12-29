@@ -1,9 +1,8 @@
 import numpy as np, pandas as pd, os
 
 from sklearn.metrics.pairwise import cosine_similarity
-# from asctb_ct_label_mapper.utilities.nlp_preprocessing import execute_nlp_pipeline
-from .utilities.nlp_preprocessing import execute_nlp_pipeline, get_asctb_embedding
-from .utilities.asctb_data_wrangling import fetch_ct_info_from_asctb_google_sheet, fetch_asctb_definitions_cell_ontology
+from asctb_ct_label_mapper.utilities.nlp_preprocessing import execute_nlp_pipeline, get_asctb_embedding
+from asctb_ct_label_mapper.utilities.asctb_data_wrangling import fetch_ct_info_from_asctb_google_sheet, fetch_asctb_definitions_cell_ontology
 
 
 

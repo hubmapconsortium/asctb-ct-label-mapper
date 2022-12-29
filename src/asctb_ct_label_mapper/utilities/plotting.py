@@ -50,5 +50,6 @@ def make_threeway_venn_diagram(A, B, C, labels, title=''):
         text.set_fontsize(16)
         text.set_fontweight('bold')
     plt.savefig(f'data/threeway_intersection_{title.lower()}.png')
+    plt.show()
     return fig
     
