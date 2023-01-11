@@ -28,11 +28,27 @@ A walkthrough is available on Google Colab [here](https://colab.research.google.
 
 ------------------------
 
-## Brief overview for Cosine Similarity
+## Architecture:
+
+------------------------
+
+### Step 1: Create Reference Embeddings
+
+![Step 1: Create Reference Embeddings](/documentation/Step1.PNG?raw=True)
+
+------------------------
+
+### Step 2: Map input Cell-Type labels to these Reference Embeddings
+
+![Step 2: Map input labels to Reference Embeddings](/documentation/Step2.PNG?raw=True)
+
+
+------------------------
+
+### Cosine Similarity
+
 ![Cosine Similarity](/documentation/Cosine_similarities_CTNames.PNG?raw=True)
 
 ------------------------
 
-## General flow:
 
-> todo: Add flow-diagram and update package link at the top of this README
