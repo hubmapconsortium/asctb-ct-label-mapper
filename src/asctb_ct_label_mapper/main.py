@@ -62,18 +62,19 @@ def fetch_asctb_reference_embeddings(sentence_encoding_model, asctb_organ='Lung'
 
 
 
-def get_best_asctb_label_match(sentence_encoding_model, asctb_embeddings_df, input_label='adventitial fibroblasts', verbose=False):
-    """Performs basic NLP preprocessing to the input label, and chooses ASCT+B match based upon cosine-similarity.
+def get_top_k_asctb_label_matches(sentence_encoding_model, asctb_embeddings_df, input_label='adventitial fibroblasts', k=1, verbose=False):
+    """Performs basic NLP preprocessing to the input label, and chooses top K ASCT+B match based upon cosine-similarity.
     The Embeddings Dataframe needs to be precomputed with an 'embeddings_results' column containing np.ndarrays of 768x1 dimensions.
 
     Args:
         sentence_encoding_model (SentenceTransformer): Sentence encoder that transforms input cleaned sentence into 768 dimensions.
         asctb_embeddings_df (pd.DataFrame): Dataframe containing an 'embeddings_results' column containing precomputed np.ndarrays of 768x1 dimensions.
         input_label (str, optional): Defaults to 'adventitial fibroblasts'.
+        k (int, optional): Fetch top-k matches based on Cosine-similarity for current raw-input CellType-label. Defaults to 1.
         verbose (bool, optional): Flag to indicate logging in verbose mode. Defaults to False.
 
     Returns:
-        str, float, str, str: Cleaned input CT-label, and best-matching ASCT+B information found for input CT-label.
+        str, list{float}, list(str), list(str): Cleaned input CT-label, and best-matching ASCT+B information found for input CT-label.
     """
     cleaned_input_label = ' '.join([execute_nlp_pipeline(word) for word in input_label.split()])
     input_embedding = sentence_encoding_model.encode(cleaned_input_label)
@@ -82,22 +83,25 @@ def get_best_asctb_label_match(sentence_encoding_model, asctb_embeddings_df, inp
     cosine_similarities = cosine_similarity(
         reference_embeddings , 
         input_embedding.reshape(1,-1)
-    )
+    ).reshape(-1)
     if verbose:  print(f'cosine_similarities={cosine_similarities.shape}\n{cosine_similarities}')
-    best_match_index = np.argmax(cosine_similarities)
-    cosine_sim_match_score = np.max(cosine_similarities)
-    best_match_ct_id = asctb_embeddings_df.loc[best_match_index, 'CT_ID']
-    best_match_ct_label = asctb_embeddings_df.loc[best_match_index, 'CT_NAME']
-    
-    if verbose:  print(f'input_label={input_label}, cosine_similarities={cosine_similarities.shape}, Cosine-Similarity={np.max(cosine_similarities)}, best_match_index={best_match_index}, Match-Found=[{best_match_ct_id} , {best_match_ct_label}]')
-    return cleaned_input_label, cosine_sim_match_score, best_match_ct_id, best_match_ct_label
+    best_match_indexes = np.argsort(-cosine_similarities)[:k]
+    cosine_sim_match_scores = cosine_similarities[best_match_indexes]
+    if verbose:  print(f'best_match_indexes={best_match_indexes}, cosine_sim_match_scores={cosine_sim_match_scores}')
+
+    best_match_ct_ids = asctb_embeddings_df.loc[best_match_indexes, 'CT_ID'].to_list()
+    best_match_ct_labels = asctb_embeddings_df.loc[best_match_indexes, 'CT_NAME'].to_list()
+    best_match_ct_texts = asctb_embeddings_df.loc[best_match_indexes, 'all_text'].to_list()
+    if verbose:  print(f'input_label={input_label}, cosine_similarities={cosine_similarities.shape}, Top-{k} Cosine-Similarities={cosine_similarities}, best_match_index={best_match_indexes}, Match-Found=[{best_match_ct_ids} , {best_match_ct_labels}]')
+
+    return cleaned_input_label, cosine_sim_match_scores, best_match_ct_ids, best_match_ct_labels, best_match_ct_texts
 
 
 
 
 
 
-def map_raw_labels_to_asctb(raw_labels, sentence_encoding_model, asctb_embeddings_df, source_name='ASCT+B', verbose=False):
+def map_raw_labels_to_asctb(raw_labels, sentence_encoding_model, asctb_embeddings_df, source_name='ASCT+B', k=1, verbose=False):
     """Main function to map all input raw-labels to a standard controlled vocabulary maintained by `ASCT+B`.
 
     For more information on ASCT+B please visit the `Master Tables` at: https://hubmapconsortium.github.io/ccf-asct-reporter/
@@ -108,7 +112,8 @@ def map_raw_labels_to_asctb(raw_labels, sentence_encoding_model, asctb_embedding
         raw_labels (iterable): A list/np.array/set of raw-input labels that need to mapped against `ASCT+B`.
         sentence_encoding_model (SentenceTransformer): Sentence encoder that transforms input cleaned sentence into 768 dimensions.
         asctb_embeddings_df (pd.DataFrame): Dataframe containing an 'embeddings_results' column containing precomputed np.ndarrays of 768x1 dimensions.
-        source_name (str): Source name like CellTypist/Azimuth/PopV. Defaults to `ASCT+B`.
+        source_name (str): Source name from where the raw_labels originate, ex- CellTypist/Azimuth/PopV. Defaults to `ASCT+B`.
+        k (int, optional): Fetch top-k matches based on Cosine-similarity for current raw-input CellType-label. Defaults to 1.
         verbose (bool, optional): Flag to indicate logging in verbose mode. Defaults to False.
 
     Returns:
@@ -124,17 +129,23 @@ def map_raw_labels_to_asctb(raw_labels, sentence_encoding_model, asctb_embedding
         'raw_input_label':raw_labels
     })
     for input_label in raw_labels:
-            cleaned_input_label, cosine_sim_match_score, best_match_ct_id, best_match_ct_label = get_best_asctb_label_match(
+            cleaned_input_label, cosine_sim_match_scores, best_match_ct_ids, best_match_ct_labels, best_match_ct_texts = get_top_k_asctb_label_matches(
                 sentence_encoding_model, 
                 asctb_embeddings_df, 
                 input_label=input_label,
+                k=k,
                 verbose=verbose
             )
             raw_to_asctb_labels_df.loc[raw_to_asctb_labels_df['raw_input_label']==input_label, 'cleaned_input_label'] = cleaned_input_label
-            raw_to_asctb_labels_df.loc[raw_to_asctb_labels_df['raw_input_label']==input_label, 'match_score'] = cosine_sim_match_score
-            raw_to_asctb_labels_df.loc[raw_to_asctb_labels_df['raw_input_label']==input_label, 'matched_asctb_id'] = best_match_ct_id
-            raw_to_asctb_labels_df.loc[raw_to_asctb_labels_df['raw_input_label']==input_label, 'matched_asctb_label'] = best_match_ct_label
-    raw_to_asctb_labels_df['exact_match_found_in_asctb'] = raw_to_asctb_labels_df['cleaned_input_label'].str.lower() == raw_to_asctb_labels_df[f'matched_asctb_label'].str.lower()
+            raw_to_asctb_labels_df.loc[raw_to_asctb_labels_df['raw_input_label']==input_label, 'match_score'] = cosine_sim_match_scores[0]
+            raw_to_asctb_labels_df.loc[raw_to_asctb_labels_df['raw_input_label']==input_label, 'matched_asctb_id'] = best_match_ct_ids[0]
+            raw_to_asctb_labels_df.loc[raw_to_asctb_labels_df['raw_input_label']==input_label, 'matched_asctb_label'] = best_match_ct_labels[0]
+            raw_to_asctb_labels_df.loc[raw_to_asctb_labels_df['raw_input_label']==input_label, 'matched_asctb_text'] = best_match_ct_texts[0]
+            for i in range(1, k):
+                raw_to_asctb_labels_df.loc[raw_to_asctb_labels_df['raw_input_label']==input_label, f'match_score_{i}'] = cosine_sim_match_scores[i]
+                raw_to_asctb_labels_df.loc[raw_to_asctb_labels_df['raw_input_label']==input_label, f'matched_asctb_id_{i}'] = best_match_ct_ids[i]
+                raw_to_asctb_labels_df.loc[raw_to_asctb_labels_df['raw_input_label']==input_label, f'matched_asctb_label_{i}'] = best_match_ct_labels[i]
+                raw_to_asctb_labels_df.loc[raw_to_asctb_labels_df['raw_input_label']==input_label, f'matched_asctb_text_{i}'] = best_match_ct_texts[i]
     if verbose:  print(f'Mapped all labels to ASCT+B. Now writing the dataframe at {tgt_filepath}')
     try:
         os.makedirs(tgt_folder, exist_ok=True)

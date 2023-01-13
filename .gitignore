@@ -1,3 +1,8 @@
+# Specific files/folders
+data/*.csv
+data/*.png
+ontology_embeddings/*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

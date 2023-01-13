@@ -11,7 +11,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "asctb_ct_label_mapper"
-version = "0.0.1"
+version = "0.0.2"
 authors = [
   {  name="Vikrant Deshpande",  email="vikrant.deshpande09876@gmail.com" }
 ]
