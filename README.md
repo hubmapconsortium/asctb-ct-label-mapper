@@ -45,6 +45,15 @@ A walkthrough is available on Google Colab [here](https://colab.research.google.
 
 ------------------------
 
+### Output: Top-2 matches from ASCT+B as suggestions for each of query Cell-Type annotation label
+
+> Expert provides feedback in order to finalize the translation from query annotation label to ASCT+B annotation label.
+
+![Output_summary](https://user-images.githubusercontent.com/32123572/231326852-4981234d-1f29-4f39-b1c3-a019c5065196.PNG)
+
+
+------------------------
+
 ### Cosine Similarity
 
 ![Cosine Similarity](/documentation/Cosine_similarities_CTNames.PNG?raw=True)
