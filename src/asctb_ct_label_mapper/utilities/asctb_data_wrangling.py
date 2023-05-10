@@ -34,16 +34,20 @@ def get_ccf_reporter_sheet_config(verbose=False):
     return sheet_config
 
 
+
+
 def get_asctb_data_url(asctb_organ='Lung', asctb_organ_version='v1.1', verbose=False):
     """Reads the sheet-config from the CCF-reporter Github repo, and parses it to fetch the dataset-link for the specific organ and version.
-
+    
     Args:
         asctb_organ (str, optional): Defaults to 'Lung'.
         asctb_organ_version (str, optional): Defaults to 'v1.1'.
         verbose (bool, optional): Flag to indicate logging in verbose mode. Defaults to False.
-
+    
     Returns:
-        str: URL for the specific ASCT+B organ and version.
+        str: `URL` for the specific ASCT+B organ and version.
+        str: `sheetId` for the specific ASCT+B organ and version.
+        str: `gid` for the required ASCT+B organ and version.
     """
     GOOGLE_SHEETS_BASE_URL = 'https://docs.google.com/spreadsheets/d/'
     SHEET_CONFIG = get_ccf_reporter_sheet_config(verbose=verbose)
@@ -58,10 +62,10 @@ def get_asctb_data_url(asctb_organ='Lung', asctb_organ_version='v1.1', verbose=F
                     version_name = version_metadata['value']
                     google_sheets_url = GOOGLE_SHEETS_BASE_URL + version_metadata['sheetId']
                     if verbose:  print(version_name, google_sheets_url)
-                    return google_sheets_url
+                    return google_sheets_url, version_metadata['sheetId'], version_metadata['gid']
     return None
 
-    
+
 
 
 def fetch_ct_info_from_asctb_google_sheet(asctb_organ='Lung', asctb_organ_version='v1.1', filepath='ontology_embeddings/', filename='ASCTB_Lungv1_2.csv', verbose=False):
@@ -70,19 +74,19 @@ def fetch_ct_info_from_asctb_google_sheet(asctb_organ='Lung', asctb_organ_versio
     Processes the ASCTB dataset in the tuples of 3 columns like `[CT/1/ID, CT/1, CT/1/LABEL], [CT/2/ID, CT/2, CT/2/LABEL], ...`
     
     Finally, produces a 3-column dataframe of `['CT_NAME', 'CT_ID', 'CT_LABEL']` with all unique CT-information for that Organ and version.
-
+    
     Args:
         asctb_organ (str, optional): Defaults to 'Lung'.
         asctb_organ_version (str, optional): Defaults to 'v1.1'.
-        filepath (str, optional): Target file directory. Defaults to 'ontology_embeddings/'.
+        filepath (str, optional): Target file directory. Defaults to '/ontology_embeddings/'.
         filename (str, optional): Target file name that'll contain the ASCTB NLP embeddings. Defaults to 'ASCTB_Lungv1_2.csv'.
         verbose (bool, optional): Flag to indicate logging in verbose mode. Defaults to False.
-
+    
     Returns:
         pd.DataFrame: 3-column dataframe of `['CT_NAME', 'CT_ID', 'CT_LABEL']`.
     """
 
-    GOOGLE_SHEET_URL = get_asctb_data_url(asctb_organ=asctb_organ, asctb_organ_version=asctb_organ_version, verbose=verbose)
+    GOOGLE_SHEET_URL, _, _ = get_asctb_data_url(asctb_organ=asctb_organ, asctb_organ_version=asctb_organ_version, verbose=verbose)
     if not GOOGLE_SHEET_URL:
         sys.exit(f'Could not fetch the Google-Sheet URL for {asctb_organ} {asctb_organ_version}...')
     raw_asctb_df = pd.read_csv(f'{GOOGLE_SHEET_URL}/export?format=csv', skiprows=10)

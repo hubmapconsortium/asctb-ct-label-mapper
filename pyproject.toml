@@ -11,11 +11,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "asctb_ct_label_mapper"
-version = "0.0.2"
+version = "0.0.3"
 authors = [
   {  name="Vikrant Deshpande",  email="vikrant.deshpande09876@gmail.com" }
 ]
-description = "A package to ensure controlled vocabulary for annotations of scRNA-seq datasets."
+description = "A package to ensure controlled vocabulary for annotations of scRNA-seq datasets by mapping cell-type names over to the ASCT+B naming conventions."
 readme = "README.md"
 requires-python = ">=3.7"
 classifiers = [

@@ -6,6 +6,8 @@ from nltk.stem import WordNetLemmatizer
 
 
 def download_nlp_models():
+    """A utility function to download the NLP package's dataset dependencies, ex- wordnet, stopwords, etc.
+    """
     print(f'Downloading NLP models required for preprocessing...')
     nltk.download('wordnet', quiet=True)
     nltk.download('omw-1.4', quiet=True)
@@ -31,13 +33,30 @@ def make_lowercase(word):
 
 def get_root_word(word):
     l = WordNetLemmatizer()
-    return l.lemmatize(word)
+    return l.lemmatize(word).rstrip('s')
 
 def is_not_stopword(word):
     return word not in set(stopwords.words('english')) and word!='NaN' 
 
 
 def execute_nlp_pipeline(word):
+    """Returns the cleaned version of the annotation label after performing the following steps:
+    
+    ```python
+        remove_whitespaces()
+        expand_word_contractions()
+        replace_special_chars()
+        convert_number_to_word()
+        make_lowercase()
+        get_root_word()
+    ```
+
+    Args:
+        word (str): Input annotation label text.
+
+    Returns:
+        str: Cleaned version of the annotation label text.
+    """
     PIPELINE_STEPS = [
         remove_whitespaces,
         expand_word_contractions,
@@ -53,11 +72,12 @@ def execute_nlp_pipeline(word):
 
 
 
-def get_asctb_embedding(row, sentence_encoding_model, verbose=False):
+def get_asctb_embedding(row, sentence_encoding_model, max_text_length=150, verbose=False):
     """Performs basic NLP preprocessing tasks with stopwords removed, and returns an embedding of the unique sentence produced.
 
     Args:
         sentence_encoding_model (SentenceTransformer): Sentence encoder that transforms input cleaned sentence into 768 dimensions.
+        max_text_length (int, optional): Max amount of text to use for converting into embedding. Defaults to 150.
         verbose (bool, optional): Flag to indicate logging in verbose mode. Defaults to False.
 
     Returns:
@@ -65,7 +85,7 @@ def get_asctb_embedding(row, sentence_encoding_model, verbose=False):
     """
     ct_id = row['CT_ID']
     ct_label = row['CT_NAME']
-    asctb_all_text = row['all_text']
+    asctb_all_text = row['all_text'][:max_text_length]
     if verbose:  print(f'CT-ID={ct_id}, CT-LABEL={ct_label}, all_text={asctb_all_text}')
     all_text = []
     unique_words = set()
